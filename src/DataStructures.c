@@ -21,7 +21,7 @@ int main(void) {
 	list_t userCredentials;
 	char user1[] = "bdankwa";
 	char user2[] = "kofi";
-	char user3[] = "kofi";
+	char user3[] = "kankam";
 	char user4[] = "yaw";
 
 	puts("Testing linked list");
@@ -31,11 +31,11 @@ int main(void) {
 		users[i].key = malloc(128);
 		users[i].data = malloc(256);
 	}
+
+	init_list(&userCredentials);
+
 	strcpy(users[0].key, user1);
 	strcpy(users[0].data, "complex password");
-
-	init_list(&userCredentials, &users[0]);
-
 	strcpy(users[1].key, user2);
 	strcpy(users[1].data, "weird password");
 	strcpy(users[2].key, user3);
@@ -43,14 +43,16 @@ int main(void) {
 	strcpy(users[3].key, user4);
 	strcpy(users[3].data, "no password");
 
-	for(int i=1; i< 4; i++){
+	for(int i=0; i< 4; i++){
+		users[i].next = NULL;
+		users[i].prev = NULL;
 		if(insert_s(&userCredentials, &users[i]) < 0){
 			printf("error inserting to single llist at %i \n", i);
 		}
 	}
 
 	struct node* someone;
-	if((someone = search_s(&userCredentials, user3)) != NULL){
+	if((someone = search_s(&userCredentials, user2)) != NULL){
 		printf("found user: %s, whose password is: %s \n",
 				(char*)someone->key, (char*)someone->data);
 	}

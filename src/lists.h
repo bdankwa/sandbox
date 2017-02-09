@@ -20,7 +20,7 @@ typedef struct{
 	unsigned int size;
 } list_t;
 
-void init_list(list_t* list, struct node* head);
+void init_list(list_t* list);
 struct node* search_s(list_t* list, char* key);
 int insert_s(list_t* list, struct node* element);
 int delete_s(list_t* list, void* key);

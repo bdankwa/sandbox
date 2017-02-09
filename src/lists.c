@@ -7,8 +7,8 @@
 #include "lists.h"
 #include <string.h>
 
-void init_list(list_t* list, struct node* head){
-	list->head = head;
+void init_list(list_t* list){
+	list->head = NULL;
 	list->size = 0;
 }
 /**********************************************
@@ -18,9 +18,12 @@ struct node* search_s(list_t* list, char* key){
 	struct node* obj = NULL;
 	if(list != NULL){
 		if(list->head != NULL){
-			while((obj = list->head->next) != NULL &&
-					strcmp(obj->key, key) != 0){
-				;
+			obj = list->head->next;
+			while(obj != NULL){
+				if(strcmp(obj->key, key) == 0){
+					break;
+				}
+				obj = obj->next;
 			}
 		}
 	}
@@ -35,10 +38,17 @@ int insert_s(list_t* list, struct node* element){
 			if(search_s(list, element->key) != NULL){
 				status = delete_s(list, element->key);
 			}
-			element->next = list->head->next;
+			element->next = list->head;
 			list->head = element;
 			list->size++;
 			status = 0;
+		}
+		else if ((list->head == NULL) && (element != NULL)){ // head
+			list->head = element;
+			status = 0;
+		}
+		else{
+			;
 		}
 	}
 	return status;
