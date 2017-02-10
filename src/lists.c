@@ -60,9 +60,13 @@ int delete_s(list_t* list, void* key){
 
 	if(list != NULL){
 		if(list->head != NULL){
-			while((obj = list->head->next) != NULL &&
-					strcmp(obj->key, key) != 0){
+			obj = list->head->next;
+			while(obj != NULL){
+				if(strcmp(obj->key, key) != 0){
+					break;
+				}
 				prev = obj;
+				obj = obj->next;
 			}
 			if(obj != NULL && prev != NULL && obj->next != NULL){
 				prev->next = obj->next;
@@ -107,12 +111,19 @@ int insert_d(list_t* list, struct node* element){
 			if(search_s(list, element->key) != NULL){
 				status = delete_d(list, element->key);
 			}
-			list->head->prev = element;
+			//list->head->prev = element;
 			element->prev = NULL;
 			element->next = list->head;
 			list->head = element;
 			status = 0;
 			list->size++;
+		}
+		else if ((list->head == NULL) && (element != NULL)){ // head
+			list->head = element;
+			status = 0;
+		}
+		else{
+			;
 		}
 	}
 	return status;

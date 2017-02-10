@@ -57,7 +57,30 @@ int main(void) {
 				(char*)someone->key, (char*)someone->data);
 	}
 	else{
-		printf("unable to find user %s\n", user3);
+		printf("unable to find user %s\n", user2);
+	}
+
+	if(!insert_s(&userCredentials, &users[1])){
+		printf("successfully added: %s \n",
+				(char*)someone->key);
+	}
+	else{
+		printf("unable to add user %s\n", user2);
+	}
+
+	if(!delete_s(&userCredentials, &users[1])){
+		printf("successfully deleted: %s \n",
+				(char*)someone->key);
+	}
+	else{
+		printf("unable to delete user %s\n", user2);
+	}
+
+	if(search_s(&userCredentials, user2) == NULL){
+		printf("user %s no longer in the list\n", user2);
+	}
+	else{
+		printf("user %s still in the list\n", user2);
 	}
 
 
