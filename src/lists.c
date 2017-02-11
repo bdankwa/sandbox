@@ -18,7 +18,7 @@ struct node* search_s(list_t* list, char* key){
 	struct node* obj = NULL;
 	if(list != NULL){
 		if(list->head != NULL){
-			obj = list->head->next;
+			obj = list->head;
 			while(obj != NULL){
 				if(strcmp(obj->key, key) == 0){
 					break;
@@ -45,6 +45,7 @@ int insert_s(list_t* list, struct node* element){
 		}
 		else if ((list->head == NULL) && (element != NULL)){ // head
 			list->head = element;
+			list->size++;
 			status = 0;
 		}
 		else{
@@ -60,9 +61,9 @@ int delete_s(list_t* list, void* key){
 
 	if(list != NULL){
 		if(list->head != NULL){
-			obj = list->head->next;
+			obj = list->head;
 			while(obj != NULL){
-				if(strcmp(obj->key, key) != 0){
+				if(strcmp(obj->key, key) == 0){
 					break;
 				}
 				prev = obj;
@@ -82,7 +83,7 @@ int delete_s(list_t* list, void* key){
 				free(obj);
 			}
 			//boundary condition
-			else if(obj->next == NULL){ // deleting tail
+			else if(obj != NULL && obj->next == NULL){ // deleting tail
 				prev->next = NULL;
 				list->size--;
 				status = 0;

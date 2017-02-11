@@ -68,7 +68,7 @@ int main(void) {
 		printf("unable to add user %s\n", user2);
 	}
 
-	if(!delete_s(&userCredentials, &users[1])){
+	if(!delete_s(&userCredentials, users[1].key)){
 		printf("successfully deleted: %s \n",
 				(char*)someone->key);
 	}
